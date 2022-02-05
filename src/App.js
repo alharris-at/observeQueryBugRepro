@@ -36,11 +36,18 @@ export default function App() {
       User.copyOf(original, updated => {
         updated.firstName = "I've been updated";
       })
-    );  };
+    );
+  };
+
+  const refreshUsers = async () => {
+    const refreshedUsers = await DataStore.query(User);
+    setUsers(refreshedUsers);
+  };
 
   return (
     <div>
       <button onClick={updateUser}>Update User</button>
+      <button onClick={refreshUsers}>Refresh Users</button>
       <h5>Users</h5>
       <ul>
         {users.map((user)=> {
